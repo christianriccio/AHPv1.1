@@ -743,8 +743,11 @@ def main():
 
         result_df = perf_df.copy()
         result_df["FinalScore"] = scores_series
+
         result_ranked = result_df.sort_values(by="FinalScore", ascending=False).reset_index()
-        result_ranked.rename(columns={"index": "Alternative"}, inplace=True)
+
+        result_ranked.rename(columns={result_ranked.columns[0]: "Alternative"}, inplace=True)
+
         result_ranked["Rank"] = np.arange(1, len(result_ranked)+1)
 
         st.markdown("**Ranking finale delle alternative**")
